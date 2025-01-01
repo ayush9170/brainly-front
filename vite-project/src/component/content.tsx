@@ -1,8 +1,32 @@
+import { useRef, useState } from "react";
 import { Cross } from "../icons/cross";
 import { Button } from "./button";
+import axios from "axios";
+
+
+enum ContentType{
+    Youtube = "youtube",
+    Twitter = "twitter"
+}
 
 
 export function Open({open,setOpen}){
+
+    const titleref  = useRef<HTMLInputElement>();
+    const linkref = useRef<HTMLInputElement>();
+    const [type,setType] = useState()
+   
+
+    async function  addContent(){
+ await axios.post("http://localhost:3000/api/v1/content" ,{
+   title :titleref.current?.value,
+   link: linkref.current?.value,
+   type :type
+
+} ,{   headers :{ authorization: `Bearer ${localStorage.getItem("token")}` }}
+)
+
+}
 
     return <div className="w-full h-screen p-0 fixed bg-gray-500 opacity-80 flex justify-center items-center">
 <div className="opacity-100 rounded-lg  bg-white ">
@@ -11,11 +35,18 @@ export function Open({open,setOpen}){
        <Cross></Cross>
        </div>
         <div>
-            <Input placeholder={"title"}></Input>
-            <Input placeholder={"Link"}></Input>
+            <Input  refrence={titleref} placeholder={"title"}></Input>
+            <Input  refrence={linkref} placeholder={"Link"}></Input>
         </div>
+        <div className="flex justify-center text-purple-800"> 
+        <h1>Type</h1>
+        </div>
+        <div className="flex">
+            <Button text="Youtube" varient={type===ContentType.Youtube ? "secondary": "primary" } onClick={()=>{setType(ContentType.Youtube)}}></Button>
+            <Button text="Twitter" varient={type===ContentType.Twitter ? "secondary": "primary" } onClick={()=>{setType(ContentType.Twitter)}}></Button>
+            </div>
         <div className="flex justify-center">
-        <Button text="Submit" varient="secondary"></Button>
+        <Button text="Submit" varient="secondary" onClick={ addContent}></Button>
         </div>
         
     </span>
@@ -24,8 +55,8 @@ export function Open({open,setOpen}){
 }
 
 
-function Input({onChange ,placeholder}:{onChange :()=>void}){
+function Input({ refrence,placeholder}:{refrence :any ;placeholder:string}){
     return <div>
-        <input placeholder={placeholder} type="text"  className="px-4 py-4 m-2" onChange={onChange}></input>
+        <input placeholder={placeholder} type="text"  className="px-4 py-4 m-2 bg-grey-200"  ref={refrence}></input>
     </div>
 }
