@@ -16,7 +16,7 @@ const response =await axios.post("  http://localhost:3000/api/v1/signin" ,{
  
 })
 const jwt = response.data.token;
-localStorage.setItem(jwt ,"token");
+localStorage.setItem("token",jwt);
 navigate("/dashboard")
 }
     return <div className="w-screen h-screen flex justify-center items-center bg-grey-200">

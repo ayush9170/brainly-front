@@ -19,11 +19,11 @@ export function Open({open,setOpen}){
 
     async function  addContent(){
  await axios.post("http://localhost:3000/api/v1/content" ,{
-   title :titleref.current?.value,
    link: linkref.current?.value,
-   type :type
+   type :type,
+   title :titleref.current?.value,
 
-} ,{   headers :{ authorization: `Bearer ${localStorage.getItem("token")}` }}
+} ,{   headers :{ authorization: `Bearer ${localStorage.getItem("token")}}`}}
 )
 
 }

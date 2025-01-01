@@ -2,16 +2,20 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export function useContent(){
-    const [content,setContent] = useState([]);
-
+export  async function useContent(){
+    const [contents,setContent] = useState([]);
+try{
     useEffect(()=>{
-const response = axios.get("http://localhost:3000/api/v1/content",{
-    headers :{ authorization: `Bearer ${localStorage.getItem("token")}` }
+ axios.get("http://localhost:3000/api/v1/content",{
+    headers :{ authorization: `Bearer ${localStorage.getItem("token")}`} 
 }).then(
     (response)=>{ setContent(response.data.content)}
 )
     },[])
 
-    return content;
+}catch(e){
+    console.log(e);
+}
+
+    return contents;
 }
