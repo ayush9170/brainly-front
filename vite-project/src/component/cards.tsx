@@ -28,7 +28,7 @@ export function Card({title,type,link}:card){
 </div>
 
 <div className="pt-4">
-    {type ==="youtube" && <iframe className="w-full "  src={link} title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>}
+    {type ==="youtube" && <iframe className="w-full "  src={link} title="YouTube video"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>}
 {type==="linkedIn" && <iframe className="w-full" src={link} title="Embedded post"></iframe>
 
 }

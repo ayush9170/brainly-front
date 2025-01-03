@@ -6,7 +6,7 @@ import axios from "axios";
 
 enum ContentType{
     Youtube = "youtube",
-    Twitter = "twitter"
+    LinkedIn ='linkedIn'
 }
 
 
@@ -23,9 +23,9 @@ export function Open({open,setOpen}){
    type :type,
    title :titleref.current?.value,
 
-} ,{   headers :{ authorization: `Bearer ${localStorage.getItem("token")}}`}}
+} ,{   headers :{ authorization: `Bearer ${localStorage.getItem("token")}`}}
 )
-
+setOpen(false);
 }
 
     return <div className="w-full h-screen p-0 fixed bg-gray-500 opacity-80 flex justify-center items-center">
@@ -43,7 +43,7 @@ export function Open({open,setOpen}){
         </div>
         <div className="flex">
             <Button text="Youtube" varient={type===ContentType.Youtube ? "secondary": "primary" } onClick={()=>{setType(ContentType.Youtube)}}></Button>
-            <Button text="Twitter" varient={type===ContentType.Twitter ? "secondary": "primary" } onClick={()=>{setType(ContentType.Twitter)}}></Button>
+            <Button text="LinkedIn" varient={type===ContentType.LinkedIn ? "secondary": "primary" } onClick={()=>{setType(ContentType.LinkedIn)}}></Button>
             </div>
         <div className="flex justify-center">
         <Button text="Submit" varient="secondary" onClick={ addContent}></Button>

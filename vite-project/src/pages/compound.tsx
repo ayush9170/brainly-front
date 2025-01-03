@@ -9,8 +9,9 @@ import {useContent} from '../hooks/useContent'
 
 function DashBoard() {
     const [open ,setOpen] =useState(false);
-    const contents = useContent();
+    const {contents} = useContent();
 
+  
  return <div  className='bg-grey-200 h-screen'>
 <SideBar></SideBar>
 <div >
@@ -20,13 +21,12 @@ function DashBoard() {
   <Button text="Add Content" icon={<Plus></Plus>}   varient="secondary" onClick={()=>{setOpen(true)}}></Button>
   <Button text="Share-brain" icon={<Icon></Icon>}  varient="primary"></Button>
   </div>
-  <div className='flex ml-80'>
-  
 
-{/* {contents.map(({type,link,title})=>
+  <div className='flex ml-80 flex-wrap'>
+
+{contents.map(({type,link,title})=>
     <Card title={title} type={type} link={link}></Card>
-)} */}
-
+)}
 
   </div>
  </div>
