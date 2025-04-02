@@ -14,7 +14,7 @@ export function Open({open,setOpen}){
 
     const titleref  = useRef<HTMLInputElement>();
     const linkref = useRef<HTMLInputElement>();
-    const [type,setType] = useState()
+    const [type,setType] = useState("")
    
 
     async function  addContent(){

@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from "react";
 import {Icon} from "../icons/shareIcon"
 
 interface card{
@@ -8,6 +9,15 @@ interface card{
 }
 
 export function Card({title,type,link}:card){
+
+    const [split ,setsplit ] =useState("");
+
+    useEffect(()=>{
+        if(type == "youtube")  setsplit(link.split("youtu.be/")[1]);
+        else setsplit(link.split("activity-")[1].split("-")[0])
+      
+    },[link])
+ 
     return <div>
 <div className="p-8 bg-white rounded-md border-gray-200 max-w-96 border m-4">
 <div className="flex justify-between">
@@ -28,8 +38,8 @@ export function Card({title,type,link}:card){
 </div>
 
 <div className="pt-4">
-    {type ==="youtube" && <iframe className="w-full "  src={link} title="YouTube video"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>}
-{type==="linkedIn" && <iframe className="w-full" src={link} title="Embedded post"></iframe>
+    {type ==="youtube" && <iframe className="w-full"  src={`https://www.youtube.com/embed/${split}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>}
+{type==="linkedIn" && <iframe className="w-full" src={`https://www.linkedin.com/embed/feed/update/urn:li:share:${split}?collapsed=1`}   title="Embedded post"></iframe>
 
 }
 </div>
@@ -37,6 +47,6 @@ export function Card({title,type,link}:card){
 </div>
 
     </div>
-
+ 
 }
 

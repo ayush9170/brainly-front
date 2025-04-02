@@ -3,7 +3,7 @@ import axios from "axios";
 
 export function useContent() {
     const [contents, setContent] = useState([]);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const fetchContent = async () => {
@@ -20,19 +20,13 @@ export function useContent() {
                     headers: { authorization: `Bearer ${token}` },
                 });
 
-                console.log("Full API Response:", response); // Log full response
+             
                 console.log("response.data:", response.data); // Log `data` object
-
-                if (response.data && Array.isArray(response.data.content)) {
-                    console.log("Setting content:", response.data.content);
-                    setContent(response.data.content);
-                } else {
-                    console.error("Unexpected response structure:", response.data);
-                    setError("Unexpected response structure");
-                }
+    setContent(response.data)
+              
             } catch (err) {
                 console.error("Error fetching content:", err);
-                setError(err.message);
+           
             }
         };
 

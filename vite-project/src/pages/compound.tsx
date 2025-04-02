@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../component/button'
 import {Card} from "../component/cards"
 import { Open } from '../component/content'
@@ -11,6 +11,9 @@ function DashBoard() {
     const [open ,setOpen] =useState(false);
     const {contents} = useContent();
 
+    useEffect(()=>{
+
+    },[open])
   
  return <div  className='bg-grey-200 h-screen'>
 <SideBar></SideBar>
